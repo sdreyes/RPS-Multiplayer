@@ -14,16 +14,16 @@ var config = {
 
   $("#chat-button").on("click", function(event) {
       event.preventDefault();
-      chat = $("#chat-input").val().trim();
+      var chat = $("#chat-input").val().trim();
 
-      database.ref().push({
+      database.ref().child('chatRoom').push({
           chat: chat
       });
 
       $("#chat-input").val("");
   });
 
-  database.ref().on("child_added", function(snapshot) {
+  database.ref().child('chatRoom').on("child_added", function(snapshot) {
       var sv = snapshot.val();
 
       console.log(sv.chat);
